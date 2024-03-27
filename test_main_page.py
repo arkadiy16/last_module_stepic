@@ -10,7 +10,7 @@ from .pages.main_page import MainPage
 
 
 def test_guest_can_go_to_login_page(driver):
-    link = "http://selenium1py.pythonanywhere.com/"
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
     page = MainPage(driver, link)
     page.open()
     page.should_be_login_link()
