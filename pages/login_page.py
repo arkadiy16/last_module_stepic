@@ -1,4 +1,7 @@
+from selenium.common.exceptions import NoSuchFrameException
+
 from .base_page import BasePage
+from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
@@ -13,8 +16,26 @@ class LoginPage(BasePage):
 
     def should_be_login_form(self):
         # реализуйте проверку, что есть форма логина
-        assert True
+        try:
+            self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL_INP_FORM)
+            self.driver.find_element(*LoginPageLocators.LOGIN_PASSWORD_INP_FORM)
+            self.driver.find_element(*LoginPageLocators.LOGIN_BTN)
+            flag_login_form = True
+        except NoSuchFrameException:
+            flag_login_form = False
+
+        assert flag_login_form, 'Login form is not present'
 
     def should_be_register_form(self):
         # реализуйте проверку, что есть форма регистрации на странице
-        assert True
+        # реализуйте проверку, что есть форма логина
+        try:
+            self.driver.find_element(*LoginPageLocators.REGISTRATION_EMAIL_INP_FORM)
+            self.driver.find_element(*LoginPageLocators.REGISTRATION_PASSWORD_1_INP_FORM)
+            self.driver.find_element(*LoginPageLocators.REGISTRATION_PASSWORD_2_INP_FORM)
+            self.driver.find_element(*LoginPageLocators.REGISTRATION_BTN)
+            flag_register_form = True
+        except NoSuchFrameException:
+            flag_register_form = False
+
+        assert flag_register_form, 'Registration form is not present'
