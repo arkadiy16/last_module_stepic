@@ -7,7 +7,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 
 from .base_page import BasePage
-from .login_page import LoginPage
 from .locators import MainPageLocators
 
 class MainPage(BasePage):
