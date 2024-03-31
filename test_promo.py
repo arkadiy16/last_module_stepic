@@ -4,9 +4,9 @@ from selenium.common.exceptions import NoSuchElementException
 from .pages.product_page import ProductPage
 
 
-@pytest.mark.parametrize('promo_id', ['0', '1', '2', '3', '4', '5',
-                                      pytest.param('6', marks=pytest.mark.xfail),
-                                      '7', '8', '9'])
+@pytest.mark.parametrize('promo_id', ['0', '1', '2', '3', '4', '5', '6',
+                                      pytest.param('7', marks=pytest.mark.xfail),
+                                      '8', '9'])
 def test_add_to_basket_from_product_page(driver, promo_id):
     link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_id}'
     page = ProductPage(driver, link)
