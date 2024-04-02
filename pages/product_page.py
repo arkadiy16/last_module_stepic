@@ -27,4 +27,14 @@ class ProductPage(BasePage):
             *ProductPageLocators.PRICE_OF_PRODUCT_ADDED_TO_BASKET).text
         return product_name_added_to_basket, product_price_added_to_basket
 
+    def guest_didnt_see_success_message(self):
+        assert self.is_not_element_present(ProductPageLocators.NAME_OF_PRODUCT_ADDED_TO_BASKET), \
+            'There are success message'
+
+    def success_message_disappeared(self):
+        assert self.is_disappeared(ProductPageLocators.NAME_OF_PRODUCT_ADDED_TO_BASKET), \
+            'Success message didn\t disappeared'
+
+
+
 

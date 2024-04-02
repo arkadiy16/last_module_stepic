@@ -1,7 +1,11 @@
 import math
 
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
 
+from .locators import BasePageLocators
 
 class BasePage:
 
@@ -34,3 +38,29 @@ class BasePage:
         except NoAlertPresentException:
             print("No second alert presented")
 
+    def is_not_element_present(self, locator, timeout=4):
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+        except TimeoutException:
+            return True
+        return False
+
+    def is_disappeared(self, locator, timeout=4):
+        try:
+            (WebDriverWait(self.driver, timeout, 1, TimeoutException).
+             until_not(EC.presence_of_element_located(locator)))
+        except TimeoutException:
+            return False
+        return True
+
+
+    def go_to_login_page(self):
+        login_link = self.driver.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+        # alert = self.driver.switch_to_alert
+        # alert.accept()
+        # return LoginPage(driver=self.driver, url=self.driver.current_url)
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), \
+            'Login link is not present or selector is invalid'
