@@ -61,6 +61,9 @@ class BasePage:
         # alert.accept()
         # return LoginPage(driver=self.driver, url=self.driver.current_url)
 
+    def go_to_basket_page(self):
+        self.driver.find_element(*BasePageLocators.BASKET_LINK).click()
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), \
             'Login link is not present or selector is invalid'
